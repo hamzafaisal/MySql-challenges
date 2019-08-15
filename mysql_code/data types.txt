@@ -1,0 +1,77 @@
+https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format
+
+//INSERT DATE and TIME
+INSERT INTO people (name, birthdate, birthtime, birthdt) VALUES('mango', CURDATE() , CURTIME() , NOW());
+
+//GET DATE and TIME
+SELECT birthdt , YEAR(birthdt) FROM people;
+SELECT birthdt , MONTHNAME(birthdt) FROM people;
+SELECT birthdt , DAYNAME(birthdt) FROM people;
+SELECT birthdt , DAYOFYEAR(birthdt) FROM people;
+
+SELECT birthdt , DATE_FORMAT(birthdt , "%W %M %Y") FROM people;
++---------------------+-----------------------------------+
+| birthdt             | DATE_FORMAT(birthdt , "%W %M %Y") |
++---------------------+-----------------------------------+
+| 1983-11-11 10:07:35 | Friday November 1983              |
+| 1943-12-25 04:10:42 | Saturday December 1943            |
+| 2019-08-09 10:02:29 | Friday August 2019                |
++---------------------+-----------------------------------+
+
+//TIME AGO
+
+SELECT birthdt , DATEDIFF(NOW() , birthdt) AS days_ago  FROM people;
++---------------------+----------+
+| birthdt             | days_ago |
++---------------------+----------+
+| 1983-11-11 10:07:35 |    13055 |
+| 1943-12-25 04:10:42 |    27621 |
+| 2019-08-09 10:02:29 |        0 |
++---------------------+----------+
+
+SELECT birthdt , CONCAT("Your Trial expire on: " , DATE_FORMAT(DATE_ADD(birthdt , INTERVAL 1 MONTH) , "%W %M %Y")) 
+		        -> AS "One Month Trial" FROM people;
++---------------------+---------------------------------------------+
+| birthdt             | One Month Trial                             |
++---------------------+---------------------------------------------+
+| 1983-11-11 10:07:35 | Your Trial expire on: Sunday December 1983  |
+| 1943-12-25 04:10:42 | Your Trial expire on: Tuesday January 1944  |
+| 2019-08-09 10:02:29 | Your Trial expire on: Monday September 2019 |
++---------------------+---------------------------------------------+
+
+
+// CREATING TABLE TO AUTOMATICALLY UPDATING TIMESTAMP ON CHANGE
+ CREATE TABLE comments
+    -> ( message VARCHAR(50),
+    ->   created_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+    -> );
+
+//CHALLENGES
+1) SELECT DAYOFWEEK(NOW());
+2) SELECT DAYNAME(NOW());
+3) SELECT DATE_FORMAT(NOW() , "%M %D at %T");
+
+4) CREATE TABLE tweets
+    -> ( content VARCHAR(140),
+    ->  username Varchar(10),
+    ->  created_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+    -> );
++------------+--------------+------+-----+-------------------+-----------------------------------------------+
+| Field      | Type         | Null | Key | Default           | Extra                                         |
++------------+--------------+------+-----+-------------------+-----------------------------------------------+
+| content    | varchar(140) | YES  |     | NULL              |                                               |
+| username   | varchar(10)  | YES  |     | NULL              |                                               |
+| created_at | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++------------+--------------+------+-----+-------------------+-----------------------------------------------+
+
+
+
+
+
+
+
+
+
+
+
+

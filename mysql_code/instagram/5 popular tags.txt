@@ -1,0 +1,17 @@
+SELECT tags.id , tag_name , COUNT(*) AS No_of_tags
+    -> FROM tags
+    -> INNER JOIN photo_tags
+    -> ON tags.id = photo_tags.tag_id
+    -> GROUP BY tags.id
+    -> ORDER BY No_of_tags DESC
+    -> LIMIT 5
+    -> ;
++----+----------+------------+
+| id | tag_name | No_of_tags |
++----+----------+------------+
+| 21 | smile    |         59 |
+| 20 | beach    |         42 |
+| 17 | party    |         39 |
+| 13 | fun      |         38 |
+| 18 | concert  |         24 |
++----+----------+------------+   

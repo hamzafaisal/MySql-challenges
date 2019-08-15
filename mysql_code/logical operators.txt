@@ -1,0 +1,134 @@
+// NOT EQUAL
+SELECT title , released_year FROM books WHERE released_year != 2003;
+
+// NOT LIKE
+SELECT DISTINCT author_fname FROM books WHERE author_fname NOT LIKE "%d%";
+
+// GREATER THAN
+SELECT title , released_year FROM books WHERE released_year >= 2000;
+
+// LESS THAN
+SELECT title , released_year FROM books WHERE released_year <= 2000;
+
+// AND
+SELECT title , author_fname , released_year FROM books WHERE author_fname = "Dave" AND released_year > 2010;
+
+// OR
+SELECT title , author_fname , released_year FROM books WHERE author_fname = "Dave" || released_year > 2010;
+
+// BETWEEN and NOT BETWEEN
+SELECT title , released_year FROM books WHERE released_year BETWEEN 2000 AND 2010;
+SELECT title , released_year FROM books WHERE released_year NOT BETWEEN 2000 AND 2010;
+
+// IN and NOT IN
+SELECT title , author_fname , released_year FROM books WHERE author_fname IN('DAVE' , 'NEIL')  AND released_year > 2010;
+SELECT title , author_fname , released_year FROM books WHERE author_fname NOT IN('DAVE' , 'NEIL') AND released_year > 2000;
+
+// CASE STATMENTS
+SELECT title , released_year,
+    -> CASE
+    -> WHEN released_year >= 2000 THEN "Modern Books"
+    -> ELSE "Old Books"
+    -> END AS "Books Era"
+    -> FROM books LIMIT 10;
++-------------------------------------------+---------------+--------------+
+| title                                     | released_year | Books Era    |
++-------------------------------------------+---------------+--------------+
+| American Gods                             |          2001 | Modern Books |
+| Interpreter of Maladies                   |          1996 | Old Books    |
+| A Hologram for the King: A Novel          |          2012 | Modern Books |
+| The Circle                                |          2013 | Modern Books |
++-------------------------------------------+---------------+--------------+
+
+
+SELECT title , stock_quantity,
+    -> CASE
+    -> WHEN stock_quantity BETWEEN 1 AND 50 THEN "*"
+    -> WHEN stock_quantity BETWEEN 50 AND 100 THEN "**"
+    -> WHEN stock_quantity > 100 THEN "***"
+    -> ELSE "No Stock"
+    -> END AS "Stock Status"
+    -> FROM books;
++-----------------------------------------------------+----------------+--------------+
+| title                                               | stock_quantity | Stock Status |
++-----------------------------------------------------+----------------+--------------+
+| The Namesake                                        |             32 | *            |           |
+| Interpreter of Maladies                             |             97 | **           |
+| A Hologram for the King: A Novel                    |            154 | ***          |
+| The Circle                                          |             26 | *            |
+| Lincoln In The Bardo                                |           1000 | ***          |
++-----------------------------------------------------+----------------+--------------+
+
+
+// CHALLENGES
+1) SELECT title , released_year FROM books WHERE released_year <= 1980;
+2) SELECT author_lname , title FROM books WHERE author_lname IN('Eggers' , 'Chabon');
+3) SELECT author_lname , title , released_year FROM books WHERE author_lname = 'Lahiri' AND released_year > 2000;
+4) SELECT title , pages FROM books WHERE pages BETWEEN 100 AND 200;
+5) SELECT title , author_lname FROM books WHERE author_lname LIKE "S%" OR author_lname LIKE "C%";
+
+6) SELECT title,
+    -> CASE
+    -> WHEN title LIKE '%stories%' THEN "short stories"
+    -> WHEN title LIKE '%Just Kids%' OR title LIKE '%A Heartbreaking Work%' THEN "memoir"
+    -> ELSE "novel"
+    -> END AS "Type"
+    -> FROM books;
++-----------------------------------------------------+---------------+
+| title                                               | Type          |
++-----------------------------------------------------+---------------+     
+| The Circle                                          | novel         |
+| The Amazing Adventures of Kavalier & Clay           | novel         |
+| Just Kids                                           | memoir        |
+| A Heartbreaking Work of Staggering Genius           | memoir        |
+| Coraline                                            | novel         |
+| What We Talk About When We Talk About Love: Stories | short stories |   
+| Cannery Row                                         | novel         |
+| Oblivion: Stories                                   | short stories |
+| Consider the Lobster                                | novel         |
++-----------------------------------------------------+---------------+
+
+
+7) SELECT title , author_lname,
+    -> CASE
+    -> WHEN COUNT(*) <= 1  THEN CONCAT(COUNT(*) , " book")
+    -> ELSE CONCAT(COUNT(*) , " books")
+    -> END AS Count
+    -> FROM books GROUP BY author_fname , author_lname;
++-----------------------------------------------------+----------------+---------+
+| title                                               | author_lname   | Count   |
++-----------------------------------------------------+----------------+---------+
+| The Namesake                                        | Lahiri         | 2 books |
+| Norse Mythology                                     | Gaiman         | 3 books |
+| A Hologram for the King: A Novel                    | Eggers         | 3 books |
+| The Amazing Adventures of Kavalier & Clay           | Chabon         | 1 book  |
+| Just Kids                                           | Smith          | 1 book  |
+| What We Talk About When We Talk About Love: Stories | Carver         | 2 books |
+| White Noise                                         | DeLillo        | 1 book  |
+| Cannery Row                                         | Steinbeck      | 1 book  |
+| Oblivion: Stories                                   | Foster Wallace | 2 books |
+| 10% Happier                                         | Harris         | 1 book  |
+| fake_book                                           | Harris         | 1 book  |
+| Lincoln In The Bardo                                | Saunders       | 1 book  |
++-----------------------------------------------------+----------------+---------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

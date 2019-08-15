@@ -1,0 +1,6 @@
+SELECT (SELECT count(*) from photos) / (SELECT count(*) from users) AS avg_user_per_post ;
++-------------------+
+| avg_user_per_post |
++-------------------+
+|            2.5700 |
++-------------------+

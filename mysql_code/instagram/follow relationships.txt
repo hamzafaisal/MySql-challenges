@@ -1,0 +1,94 @@
+CREATE TABLE users
+	(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(100) UNIQUE NOT NULL,
+	created_at TIMESTAMP DEFAULT NOW()
+	);
+
+CREATE TABLE follows
+	(
+	follower_id INT NOT NULL,
+	followee_id INT NOT NULL,
+	created_at TIMESTAMP DEFAULT NOW(),
+	FOREIGN KEY(followee_id) REFERENCES users(id),
+	FOREIGN KEY(follower_id) REFERENCES users(id),
+	PRIMARY KEY(follower_id , followee_id)
+ 	);
+
+
+
+
+//////////// NO OF FOLLOWERS \\\\\\\\\\\\
+
+SELECT users.id , username , COUNT(followee_id) AS No_of_followers
+
+	FROM users
+    
+	LEFT JOIN follows
+	
+	ON users.id = follows.followee_id
+
+	GROUP BY users.id
+	;
+
+//////////// NO OF FOLLOWED \\\\\\\\\\\\
+
+SELECT users.id , username , COUNT(follower_id) AS No_of_people_followed
+
+	FROM users
+    
+	LEFT JOIN follows
+	
+	ON users.id = follows.follower_id
+    
+	GROUP BY users.id
+    
+	;
+
+//////////// NAME OF PEOPLE FOLLOWED \\\\\\\\\\\\
+
+SELECT users.id , username , follows.followee_id ,
+ 
+    CASE
+ 
+    WHEN follows.followee_id THEN (SELECT username from users where id = follows.followee_id)
+
+     ELSE "you doesn't follow anyone"
+
+     END AS Name_of_people_followed
+
+     FROM users
+
+     LEFT JOIN follows
+	
+     ON users.id = follows.follower_id
+
+     ;
+
+//////////// NAME OF YOUR FOLLOWERS \\\\\\\\\\\\
+
+SELECT users.id , username , follows.follower_id ,
+
+    CASE
+ 
+   WHEN follows.follower_id THEN (SELECT username from users where id = follows.follower_id)
+
+    ELSE "No Followers"
+    END AS Name_of_your_followers
+
+    FROM users
+
+    LEFT JOIN follows
+
+    ON users.id = follows.followee_id
+
+    ;
+
+
+
+
+
+
+
+
+

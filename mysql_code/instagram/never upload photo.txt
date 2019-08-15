@@ -1,0 +1,171 @@
+SELECT username , IFNULL(image_url , "No Photo") AS User_Images
+    -> FROM users
+    -> LEFT JOIN photos
+    -> ON users.id = photos.user_id
+    -> WHERE image_url IS NULL;
++---------------------+-------------+
+| username            | User_Images |
++---------------------+-------------+
+| Aniya_Hackett       | No Photo    |
+| Bartholome.Bernhard | No Photo    |
+| Bethany20           | No Photo    |
+| Darby_Herzog        | No Photo    |
+| David.Osinski47     | No Photo    |
+| Duane60             | No Photo    |
+| Esmeralda.Mraz57    | No Photo    |
+| Esther.Zulauf61     | No Photo    |
+| Franco_Keebler64    | No Photo    |
+| Hulda.Macejkovic    | No Photo    |
+| Jaclyn81            | No Photo    |
+| Janelle.Nikolaus81  | No Photo    |
+| Jessyca_West        | No Photo    |
+| Julien_Schmidt      | No Photo    |
+| Kasandra_Homenick   | No Photo    |
+| Leslie67            | No Photo    |
+| Linnea59            | No Photo    |
+| Maxwell.Halvorson   | No Photo    |
+| Mckenna17           | No Photo    |
+| Mike.Auer39         | No Photo    |
+| Morgan.Kassulke     | No Photo    |
+| Nia_Haag            | No Photo    |
+| Ollie_Ledner37      | No Photo    |
+| Pearl7              | No Photo    |
+| Rocio33             | No Photo    |
+| Tierra.Trantow      | No Photo    |
++---------------------+-------------+
+
+
+
+
+
+///////////////// USERS WITH MOST PHOTOS \\\\\\\\\\\\\\\\\\\\\\\
+
+ SELECT username , COUNT(image_url) AS Most_Photos
+    -> FROM users
+    -> LEFT JOIN photos
+    -> ON users.id = photos.user_id
+    -> GROUP BY users.id
+    -> ORDER BY Most_Photos DESC
+    -> ;
++-----------------------+-------------+
+| username              | Most_Photos |
++-----------------------+-------------+
+| Eveline95             |          12 |
+| Clint27               |          11 |
+| Cesar93               |          10 |
+| Delfina_VonRueden68   |           9 |
+| Aurelie71             |           8 |
+| Jaime53               |           8 |
+| Donald.Fritsch        |           6 |
+| Travon.Waters         |           5 |
+| Colten.Harris76       |           5 |
+| Harrison.Beatty50     |           5 |
+| Florence99            |           5 |
+| Kathryn80             |           5 |
+| Kenton_Kirlin         |           5 |
+| Yvette.Gottlieb91     |           5 |
+| Adelle96              |           5 |
+| Josianne.Friesen      |           5 |
+| Justina.Gaylord27     |           5 |
+| Janet.Armstrong       |           5 |
+| Mariano_Koch3         |           5 |
+| Zack_Kemmer93         |           5 |
+| Alexandro35           |           5 |
+| Malinda_Streich       |           4 |
+| Billy52               |           4 |
+| Elenor88              |           4 |
+| Rick29                |           4 |
+| Tabitha_Schamberger11 |           4 |
+| Annalise.McKenzie16   |           4 |
+| Irwin.Larson          |           4 |
+| Gus93                 |           4 |
+| Andre_Purdy85         |           4 |
+| Harley_Lind18         |           4 |
+| Dereck65              |           4 |
+| Dario77               |           4 |
+| Seth46                |           4 |
+| Keenan.Schamberger60  |           3 |
+| Norbert_Carroll35     |           3 |
+| Presley_McClure       |           3 |
+| Maya.Farrell          |           3 |
+| Gerard79              |           3 |
+| Emilio_Bernier52      |           3 |
+| Alek_Watsica          |           3 |
+| Arely_Bogan63         |           3 |
+| Frederik_Rice         |           3 |
+| Kaley9                |           2 |
+| Jordyn.Jacobson2      |           2 |
+| Ressie_Stanton46      |           2 |
+| Nicole71              |           2 |
+| Tomas.Beatty93        |           2 |
+| Aracely.Johnston98    |           2 |
+| Hailee26              |           2 |
+| Lennie_Hartmann40     |           2 |
+| Sam52                 |           2 |
+| Alysa22               |           2 |
+| Javonte83             |           2 |
+| Milford_Gleichner42   |           2 |
+| Willie_Leuschke       |           2 |
+| Kenneth64             |           1 |
+| Erick5                |           1 |
+| Damon35               |           1 |
+| Aiyana_Hoeger         |           1 |
+| Kelsi26               |           1 |
+| Meggie_Doyle          |           1 |
+| Katarina.Dibbert      |           1 |
+| Rafael.Hickle2        |           1 |
+| Granville_Kutch       |           1 |
+| Peter.Stehr0          |           1 |
+| Jaylan.Lakin          |           1 |
+| Odessa2               |           1 |
+| Imani_Nicolas17       |           1 |
+| Darwin29              |           1 |
+| Delpha.Kihn           |           1 |
+| Yazmin_Mills95        |           1 |
+| Jayson65              |           1 |
+| Karley_Bosco          |           1 |
+| Jaclyn81              |           0 |
+| Duane60               |           0 |
+| Kasandra_Homenick     |           0 |
+| Nia_Haag              |           0 |
+| Maxwell.Halvorson     |           0 |
+| Darby_Herzog          |           0 |
+| Tierra.Trantow        |           0 |
+| Mckenna17             |           0 |
+| Morgan.Kassulke       |           0 |
+| Julien_Schmidt        |           0 |
+| Esther.Zulauf61       |           0 |
+| Jessyca_West          |           0 |
+| Pearl7                |           0 |
+| Mike.Auer39           |           0 |
+| Hulda.Macejkovic      |           0 |
+| Esmeralda.Mraz57      |           0 |
+| Leslie67              |           0 |
+| Bartholome.Bernhard   |           0 |
+| Bethany20             |           0 |
+| Ollie_Ledner37        |           0 |
+| Franco_Keebler64      |           0 |
+| Janelle.Nikolaus81    |           0 |
+| Aniya_Hackett         |           0 |
+| Rocio33               |           0 |
+| David.Osinski47       |           0 |
+| Linnea59              |           0 |
++-----------------------+-------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

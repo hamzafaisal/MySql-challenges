@@ -1,0 +1,50 @@
+//Refining Selections
+
+//DISTINCT (Get unique values from columns)
+SELECT DISTINCT author_fname FROM books;
+SELECT DISTINCT author_fname , author_lname  FROM books;
+
+//SORTING (DESC and ASC)
+SELECT title , released_year FROM books ORDER BY title;
+SELECT title , released_year FROM books ORDER BY released_year DESC;
+SELECT title , released_year FROM books ORDER BY 2; //Same as above (2 means released_year)
+SELECT author_fname, author_lname FROM books ORDER BY author_fname , author_lname;
+
+//LIMITING
+SELECT author_fname, author_lname FROM books LIMIT 5;	
+SELECT title , released_year FROM books ORDER BY released_year DESC LIMIT 5;
+
+//LIKE (for searching)
+SELECT author_fname FROM books where author_fname LIKE '%dav%'; // contain dav
+SELECT author_fname FROM books where author_fname LIKE 'v%'; 	//start with v
+SELECT author_fname FROM books where author_fname LIKE '%e'; 	//end with e
+
+SELECT title , stock_quantity FROM books where stock_quantity LIKE '___'; // return 3 digit results bcz 3 underscore
+
+//CHALLENGES
+1) SELECT title FROM books where title LIKE "%stories%";	 //book contain stories
+2) SELECT title , pages FROM books ORDER BY pages DESC LIMIT 1;  // book with most pages
+3) SELECT CONCAT_WS(" - " , title , released_year) AS summary FROM books ORDER BY released_year DESC LIMIT 3; // 3 recent books 
+4) SELECT title , author_lname FROM books where author_lname LIKE '% %'; // last name contains space
+5) SELECT title , released_year , stock_quantity FROM books ORDER BY stock_quantity ASC LIMIT 3; // 3 books with least stock
+6) SELECT title , author_lname FROM books ORDER BY author_lname , title;
+7) SELECT UPPER(
+                CONCAT(
+		       "My favourite author is " , author_fname , " " , author_lname , "!"
+		      )
+	       )
+	        AS yell FROM books ORDER BY author_lname;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

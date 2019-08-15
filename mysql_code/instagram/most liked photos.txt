@@ -1,0 +1,32 @@
+SELECT photos.id , username , image_url ,
+    -> COUNT(*) AS No_of_likes
+    -> FROM photos
+    -> INNER JOIN likes
+    -> ON photos.id = likes.photo_id
+    -> INNER JOIN users
+    -> ON users.id = photos.user_id
+    -> GROUP BY photos.id
+    -> ORDER BY No_of_likes DESC
+    -> LIMIT 1
+    -> ;
++----+---------------+---------------------+-------------+
+| id | username      | image_url           | No_of_likes |
++----+---------------+---------------------+-------------+
+|145 | Zack_Kemmer93 | https://jarret.name |          48 |
++----+---------------+---------------------+-------------+
+
+
+
+
+//////////////  MOST LIKED PHOTOS IN ORDER  \\\\\\\\\\\\\\\\
+
+SELECT photos.id , users.id , username , image_url ,
+    -> COUNT(*) AS No_of_likes
+    ->   FROM photos
+    -> INNER JOIN likes
+    -> ON photos.id = likes.photo_id
+    -> INNER JOIN users
+    -> ON users.id = photos.user_id
+    -> GROUP BY photos.id
+    -> ORDER BY No_of_likes DESC
+    -> ;

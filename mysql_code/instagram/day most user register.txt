@@ -1,0 +1,33 @@
+
+SELECT COUNT(*) AS Day_Count , DAYNAME(created_at) AS Most_Register_Day
+    ->      FROM users
+    ->      GROUP BY Most_Register_Day
+    ->      ORDER BY Day_Count DESC
+    ->      ;
++-----------+-------------------+
+| Day_Count | Most_Register_Day |
++-----------+-------------------+
+|        16 | Sunday            |
+|        16 | Thursday          |
+|        15 | Friday            |
+|        14 | Tuesday           |
+|        14 | Monday            |
+|        13 | Wednesday         |
+|        12 | Saturday          |
++-----------+-------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

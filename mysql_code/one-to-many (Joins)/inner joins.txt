@@ -1,0 +1,60 @@
+// IMPLICIT INNER JOINS
+
+SELECT * FROM customers , orders WHERE customers.id = orders.customer_id;
++----+------------+-----------+------------------+----+------------+--------+-------------+
+| id | first_name | last_name | email            | id | order_date | amount | customer_id |
++----+------------+-----------+------------------+----+------------+--------+-------------+
+|  1 | Boy        | George    | george@gmail.com |  1 | 2016-02-10 |  99.99 |           1 |
+|  1 | Boy        | George    | george@gmail.com |  2 | 2017-11-11 |  35.50 |           1 |
+|  2 | George     | Michael   | gm@gmail.com     |  3 | 2014-12-12 | 800.67 |           2 |
+|  2 | George     | Michael   | gm@gmail.com     |  4 | 2015-01-03 |  12.50 |           2 |
+|  5 | Bette      | Davis     | bette@aol.com    |  5 | 1999-04-11 | 450.25 |           5 |
++----+------------+-----------+------------------+----+------------+--------+-------------+ 
+
+
+// EXPLICIT INNER JOINS
+
+SELECT * FROM customers INNER JOIN orders ON customers.id = orders.customer_id;
++----+------------+-----------+------------------+----+------------+--------+-------------+
+| id | first_name | last_name | email            | id | order_date | amount | customer_id |
++----+------------+-----------+------------------+----+------------+--------+-------------+
+|  1 | Boy        | George    | george@gmail.com |  1 | 2016-02-10 |  99.99 |           1 |
+|  1 | Boy        | George    | george@gmail.com |  2 | 2017-11-11 |  35.50 |           1 |
+|  2 | George     | Michael   | gm@gmail.com     |  3 | 2014-12-12 | 800.67 |           2 |
+|  2 | George     | Michael   | gm@gmail.com     |  4 | 2015-01-03 |  12.50 |           2 |
+|  5 | Bette      | Davis     | bette@aol.com    |  5 | 1999-04-11 | 450.25 |           5 |
++----+------------+-----------+------------------+----+------------+--------+-------------+
+
+
+// EXPLICIT INNER JOINS with SELECTED DATA EXAMPLES
+
+SELECT first_name , email , amount , order_date FROM customers INNER JOIN orders ON customers.id = orders.customer_id;
++------------+------------------+--------+------------+
+| first_name | email            | amount | order_date |
++------------+------------------+--------+------------+
+| Boy        | george@gmail.com |  99.99 | 2016-02-10 |
+| Boy        | george@gmail.com |  35.50 | 2017-11-11 |
+| George     | gm@gmail.com     | 800.67 | 2014-12-12 |
+| George     | gm@gmail.com     |  12.50 | 2015-01-03 |
+| Bette      | bette@aol.com    | 450.25 | 1999-04-11 |
++------------+------------------+--------+------------+
+
+
+SELECT first_name , email , SUM(amount) , order_date FROM customers
+    -> INNER JOIN orders
+    -> ON customers.id = orders.customer_id
+    -> GROUP BY customers.id;
++------------+------------------+-------------+------------+
+| first_name | email            | SUM(amount) | order_date |
++------------+------------------+-------------+------------+
+| Boy        | george@gmail.com |      135.49 | 2016-02-10 |
+| George     | gm@gmail.com     |      813.17 | 2014-12-12 |
+| Bette      | bette@aol.com    |      450.25 | 1999-04-11 |
++------------+------------------+-------------+------------+
+
+
+
+
+
+
+

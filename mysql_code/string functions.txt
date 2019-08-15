@@ -1,0 +1,65 @@
+//Database string functions notes
+
+//CONCAT
+SELECT CONCAT(author_fname, " " , author_lname) FROM books; //simple
+SELECT CONCAT(author_fname, " " , author_lname) AS fullname FROM books; // with field name
+SELECT CONCAT_WS(" " , author_fname , author_lname) AS fullname FROM books; // with seperator
+
+//SUBSTRING
+SELECT SUBSTRING(title , 1 , 10) AS short_titles FROM books;
+
+//REVERSE
+SELECT REVERSE(author_fname) AS reverse_name  FROM books;
+
+//REPLACE
+SELECT REPLACE(author_fname , author_fname , author_lname ) AS replace_name FROM books; 
+// string to replace , what to replace from string , replacement string
+
+//CHAR_LENGTH
+SELECT title , CHAR_LENGTH(title) AS title_length  FROM books;
+
+//UPPER and LOWER
+SELECT UPPER(title) AS title_in_capital  FROM books;
+SELECT LOWER(title) AS title_in_lower  FROM books;
+
+//CHALLENGES
+1) SELECT title , UPPER(REVERSE(title)) AS reverse_title_and_uppercase  FROM books;
+
+2) SELECT REPLACE(title , " " , "->") AS replace_space  FROM books;
+
+3) SELECT author_lname AS forward , REVERSE(author_lname) AS backward  FROM books;
+
+4) SELECT UPPER(CONCAT_WS(" " , author_fname , author_lname)) AS fullname_in_caps FROM books;
+
+5) SELECT CONCAT_WS(" was released in " , title , released_year) AS title_with_released_year FROM books;
+
+6) SELECT title , CHAR_LENGTH(title) AS title_length  FROM books;
+
+7) SELECT CONCAT(SUBSTRING(title , 1 , 10) , "...") AS short_title ,
+    -> CONCAT_WS("," , author_lname , author_fname) AS author ,
+    -> CONCAT(stock_quantity , " in stock") AS quantity  FROM books;
+8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

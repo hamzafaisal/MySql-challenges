@@ -1,0 +1,116 @@
+1) SELECT first_name , title , grade FROM students
+    -> INNER JOIN papers
+    -> ON students.id = papers.student_id
+    -> ;
++------------+---------------------------------------+-------+
+| first_name | title                                 | grade |
++------------+---------------------------------------+-------+
+| Caleb      | My First Book Report                  |    60 |
+| Caleb      | My Second Book Report                 |    75 |
+| Samantha   | Russian Lit Through The Ages          |    94 |
+| Samantha   | De Montaigne and The Art of The Essay |    98 |
+| Carlos     | Borges and Magical Realism            |    89 |
++------------+---------------------------------------+-------+
+
+
+2) SELECT first_name , title , grade FROM students
+    -> LEFT JOIN papers
+    -> ON students.id = papers.student_id
+    -> ;
++------------+---------------------------------------+-------+
+| first_name | title                                 | grade |
++------------+---------------------------------------+-------+
+| Caleb      | My First Book Report                  |    60 |
+| Caleb      | My Second Book Report                 |    75 |
+| Samantha   | Russian Lit Through The Ages          |    94 |
+| Samantha   | De Montaigne and The Art of The Essay |    98 |
+| Raj        | NULL                                  |  NULL |
+| Carlos     | Borges and Magical Realism            |    89 |
+| Lisa       | NULL                                  |  NULL |
++------------+---------------------------------------+-------+
+
+
+3) SELECT first_name ,
+    -> IFNULL(title , "Title Missing") AS Title,
+    -> IFNULL(grade , 0) AS Grade
+    -> FROM students
+    -> LEFT JOIN papers
+    -> ON students.id = papers.student_id
+    -> ;
++------------+---------------------------------------+-------+
+| first_name | Title                                 | Grade |
++------------+---------------------------------------+-------+
+| Caleb      | My First Book Report                  |    60 |
+| Caleb      | My Second Book Report                 |    75 |
+| Samantha   | Russian Lit Through The Ages          |    94 |
+| Samantha   | De Montaigne and The Art of The Essay |    98 |
+| Raj        | Title Missing                         |     0 |
+| Carlos     | Borges and Magical Realism            |    89 |
+| Lisa       | Title Missing                         |     0 |
++------------+---------------------------------------+-------+ 
+
+
+4) SELECT first_name ,
+    -> IFNULL(AVG(grade) , 0) AS Grade_Avg
+    -> FROM students
+    -> LEFT JOIN papers
+    -> ON students.id = papers.student_id
+    -> GROUP BY students.id
+    -> ORDER BY Grade_Avg DESC;
++------------+-----------+
+| first_name | Grade_Avg |
++------------+-----------+
+| Samantha   |   96.0000 |
+| Carlos     |   89.0000 |
+| Caleb      |   67.5000 |
+| Raj        |    0.0000 |
+| Lisa       |    0.0000 |
++------------+-----------+
+
+
+5) SELECT first_name ,
+    ->        IFNULL(AVG(grade) , 0) AS Grade_Avg,
+    ->        CASE
+    ->        WHEN AVG(grade) > 75 THEN "PASSING"
+    ->        ELSE "FAILING"
+    ->        END AS passing_status
+    ->        FROM students
+    ->        LEFT JOIN papers
+    ->        ON students.id = papers.student_id
+    ->        GROUP BY students.id
+    ->        ORDER BY Grade_Avg DESC;
++------------+-----------+----------------+
+| first_name | Grade_Avg | passing_status |
++------------+-----------+----------------+
+| Samantha   |   96.0000 | PASSING        |
+| Carlos     |   89.0000 | PASSING        |
+| Caleb      |   67.5000 | FAILING        |
+| Raj        |    0.0000 | FAILING        |
+| Lisa       |    0.0000 | FAILING        |
++------------+-----------+----------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

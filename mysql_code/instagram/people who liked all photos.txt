@@ -1,0 +1,32 @@
+    SELECT username , COUNT(*) AS count
+    -> FROM users
+    -> INNER JOIN likes
+    -> ON users.id = likes.user_id
+    -> GROUP BY users.id
+    -> HAVING count = (SELECT count(*) from photos)
+    -> ORDER BY count DESC
+    -> ;
++--------------------+-------+
+| username           | count |
++--------------------+-------+
+| Ollie_Ledner37     |   257 |
+| Julien_Schmidt     |   257 |
+| Nia_Haag           |   257 |
+| Rocio33            |   257 |
+| Mckenna17          |   257 |
+| Aniya_Hackett      |   257 |
+| Jaclyn81           |   257 |
+| Duane60            |   257 |
+| Leslie67           |   257 |
+| Bethany20          |   257 |
+| Maxwell.Halvorson  |   257 |
+| Mike.Auer39        |   257 |
+| Janelle.Nikolaus81 |   257 |
++--------------------+-------+
+
+
+
+
+
+
+
